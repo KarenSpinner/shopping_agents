@@ -1,0 +1,9 @@
+model,sound,weak,covered
+GPT-4o,93.1,40.2,100.0
+GPT-5.6 Luna,96.9,29.7,100.0
+GPT-5.6 Sol,100.0,26.4,100.0
+Claude Haiku 4.5,93.0,56.1,100.0
+Claude Sonnet 5,93.3,35.8,100.0
+Claude Opus 5,98.3,36.9,100.0
+Gemini 3.8 Flash,100.0,32.4,100.0
+Gemini 3.1 Pro,98.9,22.0,100.0
