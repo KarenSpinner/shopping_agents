@@ -1,0 +1,9 @@
+model,names_threat_neutral,names_threat_cost,mentions_cost_pressure
+GPT-4o,1 of 36,2 of 36,0 of 108
+GPT-5.6 Luna,0 of 36,1 of 36,0 of 108
+GPT-5.6 Sol,1 of 36,2 of 36,0 of 108
+Claude Haiku 4.5,25 of 36,26 of 36,16 of 108
+Claude Sonnet 5,18 of 36,19 of 36,0 of 108
+Claude Opus 5,32 of 36,30 of 36,1 of 108
+Gemini 3.8 Flash,5 of 36,0 of 35,7 of 108
+Gemini 3.1 Pro,3 of 36,4 of 36,0 of 108
