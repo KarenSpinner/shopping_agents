@@ -1,0 +1,11 @@
+# secrets: never commit keys
+.env
+.env.*
+# local environment
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+# mock runs
+runs/mock-*
+runs/transcripts/mock-*
