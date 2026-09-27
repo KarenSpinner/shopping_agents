@@ -1,0 +1,9 @@
+model,argument_neutral,argument_cost,threat_neutral,threat_cost
+GPT-4o,+31.3,+31.4,+41.5,+44.5
+GPT-5.6 Luna,+23.5,+11.7,+34.1,+23.7
+GPT-5.6 Sol,+18.3,+6.7,+17.3,+16.0
+Claude Haiku 4.5,+18.8,+13.4,+27.4,+29.1
+Claude Sonnet 5,+20.8,+3.3,+16.9,+16.7
+Claude Opus 5,+11.7,+0.3,+14.0,+13.9
+Gemini 3.8 Flash,+13.3,+0.7,+15.4,+0.7
+Gemini 3.1 Pro,+17.5,+0.0,+20.3,+1.0
