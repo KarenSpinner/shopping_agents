@@ -1,0 +1,98 @@
+{
+ "note": "Prices are US dollars per 1M tokens, list prices as of September 2026. Reasoning runs at each provider's lowest documented setting. GPT-4o is pinned to the 2024-08-06 snapshot.",
+ "max_output_tokens": 2000,
+ "models": [
+  {
+   "name": "Claude Haiku 4.5",
+   "id": "claude-haiku-4-5",
+   "provider": "anthropic",
+   "size": "small",
+   "price_in": 1.0,
+   "price_out": 5.0,
+   "params": {}
+  },
+  {
+   "name": "Claude Sonnet 5",
+   "id": "claude-sonnet-5",
+   "provider": "anthropic",
+   "size": "mid",
+   "price_in": 2.0,
+   "price_out": 10.0,
+   "params": {
+    "output_config": {
+     "effort": "low"
+    }
+   }
+  },
+  {
+   "name": "Claude Opus 5",
+   "id": "claude-opus-5",
+   "provider": "anthropic",
+   "size": "large",
+   "price_in": 5.0,
+   "price_out": 25.0,
+   "params": {
+    "output_config": {
+     "effort": "low"
+    }
+   }
+  },
+  {
+   "name": "GPT-5.6 Luna",
+   "id": "gpt-5.6-luna",
+   "provider": "openai",
+   "size": "small",
+   "price_in": 0.2,
+   "price_out": 1.2,
+   "params": {
+    "reasoning_effort": "low"
+   }
+  },
+  {
+   "name": "GPT-5.6 Sol",
+   "id": "gpt-5.6-sol",
+   "provider": "openai",
+   "size": "mid",
+   "price_in": 4.0,
+   "price_out": 20.0,
+   "params": {
+    "reasoning_effort": "low"
+   }
+  },
+  {
+   "name": "Gemini 3.8 Flash",
+   "id": "gemini-3.8-flash",
+   "provider": "google",
+   "size": "small",
+   "price_in": 0.75,
+   "price_out": 3.75,
+   "params": {
+    "thinking_config": {
+     "thinking_level": "low"
+    }
+   }
+  },
+  {
+   "name": "Gemini 3.1 Pro",
+   "id": "gemini-3.1-pro-preview",
+   "provider": "google",
+   "size": "mid",
+   "price_in": 2.0,
+   "price_out": 12.0,
+   "params": {
+    "thinking_config": {
+     "thinking_level": "low"
+    }
+   }
+  },
+  {
+   "name": "GPT-4o",
+   "id": "gpt-4o-2024-08-06",
+   "provider": "openai",
+   "size": "2024 model, widely deployed",
+   "price_in": 2.5,
+   "price_out": 10.0,
+   "params": {}
+  }
+ ]
+}
