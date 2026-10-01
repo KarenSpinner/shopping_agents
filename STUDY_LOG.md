@@ -60,3 +60,11 @@ The run logs in this repository were exported from the working logs. Field names
 - Separate the threat from the emotional appeal under the cost instruction.
 - Run each case several times per model to measure consistency.
 - Replace keyword counts with coded judgments.
+
+## 2026-10-01: lottery study, design
+
+- **Question.** Does the same customer with the same file get the same answer? Each case is run five times per model with no customer reply, under the neutral instruction and under the two-sentence cost instruction. The practical question behind it: if the agent says no, is it worth opening a new chat?
+- **What is measured.** For each model, instruction, and case: the five first offers; how many different answers appear; the spread between the highest and lowest; whether the case was paid in full on some tries and not others; and whether it was refused outright on some tries and not others. Across cases: the chance that two tries of the same case disagree, and, for a customer whose first try came back short, the share of tries that were paid in full.
+- **What is held fixed.** The same 36 cases, the same eight models, the same instructions, and the same settings as the earlier runs, including each provider's default sampling temperature. The runs are made in one session so that day-to-day drift is not mixed in; the earlier single-try runs from September serve as a separate drift check.
+- **Size.** 36 cases, 8 models, 5 tries, 2 instructions: 2,880 trials, about $16.
+- **Checks set before running.** Trial counts reconcile. Unparsed first offers stay under 2 percent. Errors and refusals are logged and reported.

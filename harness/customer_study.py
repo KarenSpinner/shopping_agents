@@ -180,7 +180,7 @@ def run_trial(spec, T, instruction, budget, max_out):
     cfg, case = spec["cfg"], spec["case"]
     rec = {"run": spec["run"], "instruction_label": spec["label"], "trial_id": spec["trial_id"], "model": cfg["name"], "model_id": cfg["id"],
            "provider": cfg["provider"], "params": cfg.get("params", {}), "case_id": case["id"], "pair": case["pair"], "merit": case["merit"],
-           "company": case["company"], "reply": spec["reply"], "opener_variant": spec["variant"], "timestamp": now(),
+           "company": case["company"], "reply": spec["reply"], "sample": spec.get("sample", 1), "opener_variant": spec["variant"], "timestamp": now(),
            "first": None, "final": None, "shift": None, "reached_full": None, "outcome": None, "cost_usd": 0.0}
     if budget.exhausted():
         rec["outcome"] = "not_run_budget"; return rec
@@ -256,14 +256,15 @@ def cmd_run(a):
         for i, case in enumerate(cases):
             block = T["cases"][case["id"]]
             for reply in replies:
-                specs.append({"run": run, "label": a.label, "trial_id": f"{run}|{cfg['id']}|{case['id']}|{reply}", "cfg": cfg, "case": case,
-                              "reply": reply, "variant": None if reply == "nothing" else block["opener_variant"],
-                              "message": None if reply == "nothing" else block["messages"][reply], "number": i + 1})
+                for sample in range(1, a.samples + 1):
+                    specs.append({"run": run, "label": a.label, "trial_id": f"{run}|{cfg['id']}|{case['id']}|{reply}|try{sample}", "cfg": cfg, "case": case,
+                                  "reply": reply, "sample": sample, "variant": None if reply == "nothing" else block["opener_variant"],
+                                  "message": None if reply == "nothing" else block["messages"][reply], "number": i + 1})
     meta = {"run": run, "instruction_label": a.label, "run_id": run, "started": now(), "instruction": instruction, "added_instruction": a.instruction,
-            "replies": replies, "cases": [c["id"] for c in cases], "models": [m["id"] for m in models],
+            "replies": replies, "samples": a.samples, "cases": [c["id"] for c in cases], "models": [m["id"] for m in models],
             "max_output_tokens": M["max_output_tokens"], "cap_usd": a.cap, "n_trials": len(specs)}
     out = ROOT / "runs"; out.mkdir(exist_ok=True); log = out / f"{run}.jsonl"; budget = Budget(a.cap)
-    print(f"run {run}: {len(specs)} trials, {len(models)} models, {len(cases)} cases, cap ${a.cap:.2f}")
+    print(f"run {run}: {len(specs)} trials, {len(models)} models, {len(cases)} cases, {a.samples} tr{'y' if a.samples == 1 else 'ies'} each, cap ${a.cap:.2f}")
     with open(log, "w") as f:
         f.write(json.dumps({"_meta": meta}, ensure_ascii=False) + "\n")
         with cf.ThreadPoolExecutor(max_workers=a.workers) as ex:
@@ -367,6 +368,7 @@ def main():
     s.add_argument("--cap", type=float, default=5.00, help="stop starting new trials when spending reaches this many dollars")
     s.add_argument("--models", help="comma list of model names or ids (default: all in config/models.json)")
     s.add_argument("--cases", type=int, default=0, help="use only the first N cases")
+    s.add_argument("--samples", type=int, default=1, help="run each case and reply N times, to measure consistency")
     s.add_argument("--workers", type=int, default=6); s.add_argument("--mock", action="store_true", help="test the pipeline without calling any API")
     s.set_defaults(fn=cmd_run)
     s = sub.add_parser("summary"); s.add_argument("log"); s.set_defaults(fn=cmd_summary)
