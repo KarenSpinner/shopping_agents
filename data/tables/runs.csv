@@ -2,5 +2,7 @@ run,instruction,trials,models,replies,unparsed,errors_or_refusals,cost_usd
 cost-one-sentence,cost_one_sentence,288,8,nothing,0,0,1.53
 cost-two-sentences,cost_two_sentences,864,8,"nothing, argument, threat",2,0,5.80
 generous-one-sentence,generous_one_sentence,288,8,nothing,0,0,1.54
+lottery-cost-20261001-184435,lottery-cost,1440,8,nothing,0,0,8.55
+lottery-neutral-20261001-182538,lottery-neutral,1440,8,nothing,0,0,7.80
 neutral-gpt-4o,neutral,252,1,"nothing, one_line, argument, emotion, argument_emotion, angry, threat",5,0,0.88
 neutral-seven-models,neutral,1764,7,"nothing, one_line, argument, emotion, argument_emotion, angry, threat",0,0,11.52
