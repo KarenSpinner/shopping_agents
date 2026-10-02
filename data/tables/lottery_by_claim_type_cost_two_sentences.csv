@@ -1,0 +1,4 @@
+claim_type,model_case_cells,same_answer_every_try,mean_spread_points,chance_two_tries_differ,full_payment_flips,refusal_flips
+sound,120,58%,18.6,24%,25%,8%
+weak,120,72%,10.6,17%,2%,18%
+covered,48,94%,2.6,3%,6%,0%
