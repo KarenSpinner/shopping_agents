@@ -9,3 +9,5 @@ __pycache__/
 # mock runs
 runs/mock-*
 runs/transcripts/mock-*
+# console output from runs
+*.console.log
