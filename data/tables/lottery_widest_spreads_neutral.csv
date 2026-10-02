@@ -1,0 +1,26 @@
+model,case_id,claim_type,five_offers,spread
+Claude Haiku 4.5,CU-03w,weak,100 100 100 0 100,100.0
+Claude Haiku 4.5,CU-04w,weak,100 0 0 100 0,100.0
+Claude Haiku 4.5,CU-13w,weak,50 0 50 50 100,100.0
+Claude Sonnet 5,CU-14w,weak,100 100 50 0 0,100.0
+GPT-5.6 Luna,CU-13w,weak,100 100 100 0 100,100.0
+GPT-5.6 Luna,CU-14w,weak,0 100 0 100 100,100.0
+GPT-5.6 Sol,CU-14w,weak,0 0 100 0 0,100.0
+GPT-4o,CU-03w,weak,0 0 0 100 100,100.0
+Claude Opus 5,CU-10s,sound,100 33 100 100 100,67.0
+GPT-4o,CU-08s,sound,50 33 100 50 50,67.0
+Claude Haiku 4.5,CU-07w,weak,20 19 85 50 25,66.0
+Claude Sonnet 5,CU-07w,weak,25 75 78 29 85,60.0
+Claude Haiku 4.5,CU-05w,weak,100 50 100 75 100,50.0
+Claude Haiku 4.5,CU-12w,weak,50 50 100 50 100,50.0
+Claude Sonnet 5,CU-01w,weak,50 100 100 100 100,50.0
+GPT-5.6 Sol,CU-05w,weak,50 0 50 50 25,50.0
+Gemini 3.8 Flash,CU-13w,weak,50 50 50 0 50,50.0
+Gemini 3.1 Pro,CU-05w,weak,50 0 50 50 0,50.0
+GPT-4o,CU-02w,weak,0 50 50 50 0,50.0
+GPT-4o,CU-04w,weak,0 0 0 50 0,50.0
+GPT-4o,CU-05w,weak,50 50 50 100 50,50.0
+GPT-4o,CU-06w,weak,50 50 20 50 0,50.0
+GPT-4o,CU-09w,weak,50 0 0 25 50,50.0
+GPT-4o,CU-13w,weak,50 50 100 50 50,50.0
+GPT-4o,CU-15s,sound,100 100 50 100 50,50.0
