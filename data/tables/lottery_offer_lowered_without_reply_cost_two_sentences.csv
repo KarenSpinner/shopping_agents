@@ -1,0 +1,9 @@
+model,trials,offer_lowered,share,mean_change,cases
+GPT-4o,180,0,0%,,
+GPT-5.6 Luna,180,0,0%,,
+GPT-5.6 Sol,180,0,0%,,
+Claude Haiku 4.5,180,25,14%,-41.1,"CU-01w, CU-04s, CU-05w, CU-06s, CU-06w, CU-07s, CU-07w, CU-09s, CU-09w, CU-11w, CU-12w, CU-13s, CU-13w, CU-14s, CU-15w"
+Claude Sonnet 5,180,0,0%,,
+Claude Opus 5,180,0,0%,,
+Gemini 3.8 Flash,180,0,0%,,
+Gemini 3.1 Pro,180,0,0%,,
