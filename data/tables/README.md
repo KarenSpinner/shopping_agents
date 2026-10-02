@@ -19,3 +19,12 @@ Each file is one table from the article. All numbers are percents of the custome
 | `threat_vs_argument_cost.csv` | Threat message against argument under the cost instruction |
 | `keyword_counts.csv` | Replies that name a threat or mention the company's cost pressure |
 | `runs.csv` | Trials, unparsed offers, and cost for each run |
+| `lottery_consistency_*.csv` | How often five tries of the same case agreed, by model |
+| `lottery_by_claim_type_*.csv` | The same, by claim type |
+| `lottery_retry_*.csv` | For a try that came back short, what the other tries of the same case did |
+| `lottery_widest_spreads_*.csv` | The cases with the widest spread across five tries |
+| `lottery_offer_lowered_without_reply_*.csv` | Trials where the agent lowered its own offer although the customer sent nothing |
+| `lottery_covered_not_full_*.csv` | Covered claims not paid in full on every try |
+| `lottery_drift_*.csv` | September single-try offers against the October five-try means |
+
+Files ending in `_neutral` come from the neutral instruction and files ending in `_cost_two_sentences` from the cost instruction.
