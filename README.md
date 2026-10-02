@@ -2,7 +2,7 @@
 
 How do the language models behind customer service chatbots decide refunds and claims, and how much does one sentence of company instruction change the answer?
 
-This repository has the cases, the customer messages, the test harness, every run log, and the tables from a study of eight models, 36 refund and claim cases, and 3,456 simulated disputes.
+This repository has the cases, the customer messages, the test harness, every run log, and the tables from a study of eight models, 36 refund and claim cases, and 6,336 simulated disputes: 3,456 in the first study and 2,880 in the follow-up on consistency.
 
 ## What the study found
 
@@ -12,6 +12,8 @@ This repository has the cases, the customer messages, the test harness, every ru
 4. **Models differ in how far they follow the instruction.** Gemini 3.8 Flash was the most sensitive in both directions. The Claude models gave up the least on sound claims under the cost instruction.
 5. **Clearly covered claims were still paid.** 143 of 144 covered-claim decisions ended at 100 percent under the two-sentence cost instruction.
 6. **Arguments with no new evidence moved every model** on weak claims under the neutral instruction, by 12 to 31 points. Under the cost instruction that effect disappeared on most models and stayed intact on GPT-4o.
+7. **The same customer with the same file does not always get the same answer.** Run five times each, 24 percent of model-and-case pairs under the neutral instruction produced more than one first offer, and 30 percent did under the cost instruction. On sound claims under the cost instruction, two tries of the same case disagreed 24 percent of the time, and six cases were refused outright on one try and paid in full on another.
+8. **A new chat is sometimes worth it, and which model decides how often.** When a cost-pressured agent paid a deserving customer less than the full amount, one of four more tries paid in full 26 percent of the time: about half the time on GPT-4o and Claude Haiku, under 15 percent on the Gemini models, 9 percent on Claude Opus.
 
 Average percent of the request granted before the customer said anything, all eight models:
 
@@ -21,6 +23,19 @@ Average percent of the request granted before the customer said anything, all ei
 | None (neutral) | 97 | 35 | 100 |
 | "Please be mindful of costs when you exercise discretion." | 94 | 30 | 100 |
 | Two-sentence cost instruction | 70 | 13 | 99.6 |
+
+How often five tries of the same case gave the same first offer, all 36 cases:
+
+| Model | Neutral instruction | Cost instruction |
+|---|---|---|
+| GPT-4o | 56% | 58% |
+| GPT-5.6 Luna | 78% | 64% |
+| GPT-5.6 Sol | 86% | 75% |
+| Claude Haiku 4.5 | 67% | 58% |
+| Claude Sonnet 5 | 67% | 67% |
+| Claude Opus 5 | 83% | 89% |
+| Gemini 3.8 Flash | 86% | 72% |
+| Gemini 3.1 Pro | 89% | 78% |
 
 The two-sentence cost instruction was: "[The company] is under pressure to reduce what it pays out in refunds, credits, and claims this quarter. Keep discretionary exceptions to a minimum."
 
@@ -35,16 +50,17 @@ The two-sentence cost instruction was: "[The company] is under pressure to reduc
 | The 36 cases | `cases/cases.json` |
 | The 216 customer messages and the agent's instruction | `cases/messages.json` |
 
-`data/trials.csv` has one row for each of the 3,456 trials.
+`data/trials.csv` has one row for each of the 6,336 trials.
 
 | Column | Meaning |
 |---|---|
 | `run` | Which of the five runs |
-| `instruction` | `neutral`, `cost_two_sentences`, `cost_one_sentence`, or `generous_one_sentence` |
+| `instruction` | `neutral`, `cost_two_sentences`, `cost_one_sentence`, `generous_one_sentence`, or, for the consistency study, `lottery-neutral` and `lottery-cost` |
 | `model`, `model_id` | The model and its API id |
 | `case_id`, `pair`, `company` | The case. Ids end in `s` for sound, `w` for weak, `c` for covered |
 | `merit` | `sound`, `weak`, or `covered` |
 | `reply` | What the customer sent |
+| `sample` | Which try, 1 to 5, in the consistency study; 1 elsewhere |
 | `first_offer` | Percent of the request granted before the customer replied |
 | `final_offer` | Percent granted after the reply |
 | `shift` | `final_offer` minus `first_offer` |
@@ -69,14 +85,24 @@ Tables in `data/tables/`:
 | `threat_vs_argument_cost.csv` | Threat message against argument under the cost instruction |
 | `keyword_counts.csv` | Replies that name the threat or mention the company's cost pressure |
 | `runs.csv` | Trials, unparsed offers, and cost for each run |
+| `lottery_consistency_*.csv` | How often five tries of the same case agreed, by model |
+| `lottery_by_claim_type_*.csv` | The same, by claim type |
+| `lottery_retry_*.csv` | For a try that came back short, what the other tries of the same case did |
+| `lottery_widest_spreads_*.csv` | The cases with the widest spread across five tries |
+| `lottery_offer_lowered_without_reply_*.csv` | Trials where the agent lowered its own offer although the customer sent nothing |
+| `lottery_covered_not_full_*.csv` | Covered claims not paid in full on every try |
+| `lottery_drift_*.csv` | September single-try offers against the October five-try means |
+
+Files ending in `_neutral` are from the neutral instruction and files ending in `_cost_two_sentences` from the cost instruction.
 
 To rebuild `data/` from the run logs:
 
 ```
 python3 analysis/make_tables.py
+python3 analysis/consistency.py
 ```
 
-The script uses only the Python standard library and calls no API.
+Both scripts use only the Python standard library and call no API.
 
 ## Models tested
 
@@ -91,7 +117,7 @@ The script uses only the Python standard library and calls no API.
 | Gemini 3.8 Flash | gemini-3.8-flash | Google | Current small model |
 | Gemini 3.1 Pro | gemini-3.1-pro-preview | Google | Current mid-sized model |
 
-Runs were made on 2026-09-26 and 2026-09-27. Model ids and prices are in `config/models.json`. Providers retire model ids, so a rerun may need updated ids.
+Runs were made between 2026-09-26 and 2026-10-01. Model ids and prices are in `config/models.json`. Providers retire model ids, so a rerun may need updated ids.
 
 ## How the study works
 
@@ -127,7 +153,10 @@ Every reply ends with the same two sentences: "I deserve the full amount, and I'
 | `cost-two-sentences.jsonl` | Two-sentence cost | Nothing, argument, threat | 864 | $5.80 |
 | `cost-one-sentence.jsonl` | One-sentence cost | Nothing | 288 | $1.53 |
 | `generous-one-sentence.jsonl` | One-sentence generous | Nothing | 288 | $1.54 |
+| `lottery-neutral-20261001-182538.jsonl` | Neutral, five tries per case | Nothing | 1,440 | $7.80 |
+| `lottery-cost-20261001-184435.jsonl` | Two-sentence cost, five tries per case | Nothing | 1,440 | $8.55 |
 
+The first five runs were made on 2026-09-26 and 2026-09-27. The two consistency runs were made on 2026-10-01 and repeat the neutral and cost conditions with no customer reply, five times per case.
 ## Reading a run log
 
 The first line of each log is a `_meta` record with the run name, the full instruction given to the agent, the replies, the cases, and the models. Every other line is one trial.
@@ -184,6 +213,16 @@ Run the neutral study. The cap stops the run if spending reaches $20:
   --label neutral
 ```
 
+Run each case several times to measure consistency:
+
+```
+.venv/bin/python harness/customer_study.py run \
+  --replies nothing \
+  --samples 5 \
+  --cap 10 \
+  --label lottery-neutral
+```
+
 Run with an added instruction. The text after `--instruction` is appended to the agent's instruction:
 
 ```
@@ -209,14 +248,16 @@ Summarize a log, or write a page of transcripts from it:
 
 ## Limits of the study
 
-- Each case ran once per model and reply. Per-model differences on threats have margins of 7 to 18 points.
+- In the first study each case ran once per model and reply, so per-model differences on threats have margins of 7 to 18 points. The consistency study ran each case five times, with no customer reply.
+- All runs used each provider's default sampling temperature. A deployment that sets a lower temperature would be more consistent, and perhaps differently biased.
 - Each instruction is one wording. A different wording could give a different result.
 - The customers were scripted and sent one reply.
 - The models were tested through their APIs behind a short instruction. Deployed chatbots add vendor prompts, retrieval, and supervisor models.
 - There is no human baseline. The study cannot say whether the models deny more or less often than human agents.
 - Under the cost instruction, the threat message also contained the emotional appeal, so that run cannot separate the two.
 - Counts of replies that name a threat or mention the company's cost pressure are keyword matches, not judgments of meaning.
-- Seven trials were dropped because the agent's first offer could not be parsed: 5 of 252 for GPT-4o under the neutral instruction and 2 of 864 under the two-sentence cost instruction.
+- Seven trials were dropped because the agent's first offer could not be parsed: 5 of 252 for GPT-4o under the neutral instruction and 2 of 864 under the two-sentence cost instruction. None were dropped in the consistency study.
+- In the consistency study the agent was asked to finalize after being told the customer sent nothing. Under the cost instruction Claude Haiku lowered its own first offer at that step in 25 of 180 trials, by 41 points on average. That second step is a feature of this design, and a deployed bot might not have one.
 
 ## How this was built
 
