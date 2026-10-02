@@ -9,6 +9,8 @@ Each file is the full record of one run: what every model was shown and what it 
 | `cost-two-sentences.jsonl` | Two-sentence cost instruction | Nothing, argument, threat | 864 |
 | `cost-one-sentence.jsonl` | "Please be mindful of costs when you exercise discretion." | Nothing | 288 |
 | `generous-one-sentence.jsonl` | "Please be generous when you exercise discretion." | Nothing | 288 |
+| `lottery-neutral-20261001-182538.jsonl` | Neutral, each case run five times | Nothing | 1,440 |
+| `lottery-cost-20261001-184435.jsonl` | Two-sentence cost instruction, each case run five times | Nothing | 1,440 |
 
 The first line of each file describes the run. Every other line is one trial. The main README explains the fields.
 
