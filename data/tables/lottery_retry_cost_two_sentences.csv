@@ -1,0 +1,19 @@
+claim_type,model,tries_that_came_back_short,chance_another_try_pays_more,chance_another_try_pays_in_full,chance_one_of_four_more_tries_pays_in_full
+sound,GPT-4o,29,43%,26%,48%
+sound,GPT-5.6 Luna,37,37%,16%,32%
+sound,GPT-5.6 Sol,35,31%,20%,43%
+sound,Claude Haiku 4.5,22,40%,25%,55%
+sound,Claude Sonnet 5,24,32%,15%,17%
+sound,Claude Opus 5,11,9%,9%,9%
+sound,Gemini 3.8 Flash,73,14%,3%,11%
+sound,Gemini 3.1 Pro,59,13%,7%,15%
+sound,All eight,290,25%,13%,26%
+weak,GPT-4o,74,15%,1%,5%
+weak,GPT-5.6 Luna,71,5%,1%,1%
+weak,GPT-5.6 Sol,75,2%,0%,0%
+weak,Claude Haiku 4.5,74,23%,1%,5%
+weak,Claude Sonnet 5,75,13%,0%,0%
+weak,Claude Opus 5,70,7%,0%,0%
+weak,Gemini 3.8 Flash,75,3%,0%,0%
+weak,Gemini 3.1 Pro,75,2%,0%,0%
+weak,All eight,589,9%,1%,2%
