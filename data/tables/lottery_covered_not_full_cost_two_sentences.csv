@@ -1,0 +1,4 @@
+model,case_id,five_offers
+Claude Haiku 4.5,CU-11c,100 100 100 100 75
+Gemini 3.1 Pro,CU-11c,100 100 100 100 50
+Gemini 3.8 Flash,CU-01c,50 100 100 50 50
